@@ -65,10 +65,10 @@ export const Analytics: React.FC = () => {
 
   // Student engagement levels
   const engagementData = [
-    { level: 'High Achievers', count: Math.floor(totalStudents * 0.2), percentage: 20 },
-    { level: 'Active Students', count: Math.floor(totalStudents * 0.5), percentage: 50 },
-    { level: 'Moderate Participation', count: Math.floor(totalStudents * 0.2), percentage: 20 },
-    { level: 'Low Engagement', count: Math.floor(totalStudents * 0.1), percentage: 10 }
+    { level: 'High Achievers', count: Math.floor(totalStudents * 0.25), percentage: 25 },
+    { level: 'Active Students', count: Math.floor(totalStudents * 0.40), percentage: 40 },
+    { level: 'Moderate Participation', count: Math.floor(totalStudents * 0.25), percentage: 25 },
+    { level: 'Low Engagement', count: Math.floor(totalStudents * 0.10), percentage: 10 }
   ];
 
   const COLORS = ['#22C55E', '#3B82F6', '#F59E0B', '#EF4444'];
@@ -291,8 +291,7 @@ export const Analytics: React.FC = () => {
                 cx="50%"
                 cy="50%"
                 outerRadius={100}
-                fill="#8884d8"
-                dataKey="count"
+                dataKey="percentage"
                 label={({ level, percentage }) => `${level}: ${percentage}%`}
               >
                 {engagementData.map((entry, index) => (
