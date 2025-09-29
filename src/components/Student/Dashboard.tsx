@@ -67,20 +67,20 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8">
-        <h1 className="text-3xl font-bold mb-2">Welcome back, {student.name}!</h1>
-        <p className="text-blue-100">Here's your academic overview</p>
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {student.name}!</h1>
+        <p className="text-blue-100 text-sm sm:text-base">Here's your academic overview</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">CGPA</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">{student.cgpa}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{student.cgpa}</p>
             </div>
             <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-xl">
               <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -150,7 +150,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Grade Performance</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -188,7 +188,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
       </div>
 
       {/* Recent Activities & Badges */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activities</h3>
           <div className="space-y-4">
@@ -215,7 +215,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Badges ({earnedBadges.length}/{badges.length})
           </h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {badges.map((badge) => {
               const isEarned = earnedBadges.some(b => b.id === badge.id);
               return (

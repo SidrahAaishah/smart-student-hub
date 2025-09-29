@@ -289,7 +289,7 @@ export const Notifications: React.FC<NotificationsProps> = ({ userId, userRole }
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+        <div className="absolute right-0 mt-2 w-80 sm:w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
           <div className="p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -306,7 +306,7 @@ export const Notifications: React.FC<NotificationsProps> = ({ userId, userRole }
             </div>
           </div>
 
-          <div className="max-h-96 overflow-y-auto">
+          <div className="max-h-80 sm:max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-4 text-center text-gray-500 dark:text-gray-400">
                 <Bell className="w-8 h-8 mx-auto mb-2 opacity-50" />
@@ -316,7 +316,7 @@ export const Notifications: React.FC<NotificationsProps> = ({ userId, userRole }
               notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
+                  className={`p-3 sm:p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
                     !notification.read ? 'bg-blue-50 dark:bg-blue-900/20' : ''
                   }`}
                   onClick={() => markAsRead(notification.id)}
@@ -327,7 +327,7 @@ export const Notifications: React.FC<NotificationsProps> = ({ userId, userRole }
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className={`text-sm font-medium ${
+                        <p className={`text-sm font-medium leading-tight ${
                           !notification.read 
                             ? 'text-gray-900 dark:text-white' 
                             : 'text-gray-700 dark:text-gray-300'
@@ -338,15 +338,25 @@ export const Notifications: React.FC<NotificationsProps> = ({ userId, userRole }
                           <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1 leading-tight">
                         {notification.message}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                        {notification.timestamp.toLocaleDateString()} at{' '}
-                        {notification.timestamp.toLocaleTimeString([], { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
-                        })}
+                        <span className="hidden sm:inline">
+                          {notification.timestamp.toLocaleDateString()} at{' '}
+                          {notification.timestamp.toLocaleTimeString([], { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </span>
+                        <span className="sm:hidden">
+                          {notification.timestamp.toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
                       </p>
                     </div>
                   </div>

@@ -132,47 +132,56 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
   const totalTodos = todos.length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl p-8 shadow-sm">
-        <h1 className="text-3xl font-bold mb-2">Student Assistant</h1>
-        <p className="text-purple-100">Organize your day, track your goals, and manage your schedule</p>
+      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl p-4 sm:p-6 lg:p-8 shadow-sm">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Student Assistant</h1>
+        <p className="text-purple-100 text-sm sm:text-base">Organize your day, track your goals, and manage your schedule</p>
       </div>
 
       {/* Main Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         
         {/* Left Column - Todo List and Goals */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           
           {/* Daily Goals */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
             <div className="flex items-center mb-4">
               <Target className="w-5 h-5 text-green-600 mr-2" />
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Goals of Today</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Goals of Today</h2>
             </div>
             <textarea
               value={dailyGoal}
               onChange={(e) => saveDailyGoal(e.target.value)}
               placeholder="What do you want to achieve today? Write your daily goals here..."
-              className="w-full h-32 p-4 border border-gray-300 dark:border-gray-600 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+              className="w-full h-24 sm:h-32 p-3 sm:p-4 border border-gray-300 dark:border-gray-600 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm sm:text-base"
             />
-            <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               <Calendar className="w-4 h-4 inline mr-1" />
-              {new Date().toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
+              <span className="hidden sm:inline">
+                {new Date().toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
+              </span>
+              <span className="sm:hidden">
+                {new Date().toLocaleDateString('en-US', { 
+                  weekday: 'short', 
+                  month: 'short', 
+                  day: 'numeric' 
+                })}
+              </span>
             </div>
           </div>
 
           {/* Todo List */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">To-Do List</h2>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">To-Do List</h2>
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 {completedTodos}/{totalTodos} completed
               </div>
             </div>
@@ -197,18 +206,19 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
                 onChange={(e) => setNewTodo(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addTodo()}
                 placeholder="Add a new task..."
-                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="flex-1 px-3 sm:px-4 py-2 sm:py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm sm:text-base min-h-[44px]"
               />
               <button
                 onClick={addTodo}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+                className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center min-h-[44px] min-w-[44px] justify-center"
+                aria-label="Add task"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
 
             {/* Todo Items */}
-            <div className="space-y-2 max-h-64 overflow-y-auto">
+            <div className="space-y-2 max-h-48 sm:max-h-64 overflow-y-auto">
               {todos.map((todo) => (
                 <div
                   key={todo.id}
@@ -220,11 +230,12 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
                 >
                   <button
                     onClick={() => toggleTodo(todo.id)}
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
+                    className={`w-6 h-6 sm:w-5 sm:h-5 rounded-full border-2 flex items-center justify-center transition-colors min-w-[24px] min-h-[24px] ${
                       todo.completed
                         ? 'bg-green-600 border-green-600 text-white'
                         : 'border-gray-300 dark:border-gray-600 hover:border-green-500'
                     }`}
+                    aria-label={todo.completed ? 'Mark as incomplete' : 'Mark as complete'}
                   >
                     {todo.completed && <Check className="w-3 h-3" />}
                   </button>
@@ -236,20 +247,28 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && saveEdit()}
-                        className="flex-1 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white"
+                        className="flex-1 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white text-sm min-h-[32px]"
                         autoFocus
                       />
-                      <button onClick={saveEdit} className="text-green-600 hover:text-green-700">
+                      <button 
+                        onClick={saveEdit} 
+                        className="text-green-600 hover:text-green-700 p-1 min-w-[32px] min-h-[32px] flex items-center justify-center"
+                        aria-label="Save edit"
+                      >
                         <Save className="w-4 h-4" />
                       </button>
-                      <button onClick={cancelEdit} className="text-gray-600 hover:text-gray-700">
+                      <button 
+                        onClick={cancelEdit} 
+                        className="text-gray-600 hover:text-gray-700 p-1 min-w-[32px] min-h-[32px] flex items-center justify-center"
+                        aria-label="Cancel edit"
+                      >
                         <X className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
                     <>
                       <span
-                        className={`flex-1 ${
+                        className={`flex-1 text-sm sm:text-base ${
                           todo.completed
                             ? 'line-through text-gray-500 dark:text-gray-400'
                             : 'text-gray-900 dark:text-white'
@@ -259,13 +278,15 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
                       </span>
                       <button
                         onClick={() => startEditing(todo.id, todo.text)}
-                        className="text-gray-400 hover:text-blue-600 transition-colors"
+                        className="text-gray-400 hover:text-blue-600 transition-colors p-1 min-w-[32px] min-h-[32px] flex items-center justify-center"
+                        aria-label="Edit task"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => deleteTodo(todo.id)}
-                        className="text-gray-400 hover:text-red-600 transition-colors"
+                        className="text-gray-400 hover:text-red-600 transition-colors p-1 min-w-[32px] min-h-[32px] flex items-center justify-center"
+                        aria-label="Delete task"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -274,9 +295,9 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
                 </div>
               ))}
               {todos.length === 0 && (
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                  <Check className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                  <p>No tasks yet. Add one above to get started!</p>
+                <div className="text-center py-6 sm:py-8 text-gray-500 dark:text-gray-400">
+                  <Check className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 opacity-50" />
+                  <p className="text-sm sm:text-base">No tasks yet. Add one above to get started!</p>
                 </div>
               )}
             </div>
@@ -284,13 +305,52 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
         </div>
 
         {/* Right Column - Timetable */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center mb-4 sm:mb-6">
             <Clock className="w-5 h-5 text-blue-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Scheduled Time Table</h2>
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Scheduled Time Table</h2>
           </div>
 
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          {/* Mobile: Stack layout */}
+          <div className="sm:hidden space-y-3 max-h-80 overflow-y-auto">
+            {timeSlots.map((slot) => (
+              <div
+                key={slot.id}
+                className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600"
+              >
+                <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  {slot.time}
+                </div>
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={slot.subject}
+                    onChange={(e) => updateTimeSlot(slot.id, 'subject', e.target.value)}
+                    placeholder="Subject/Activity"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded focus:ring-1 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 min-h-[44px]"
+                  />
+                  <select
+                    value={slot.type}
+                    onChange={(e) => updateTimeSlot(slot.id, 'type', e.target.value)}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded focus:ring-1 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-600 text-gray-900 dark:text-white min-h-[44px]"
+                  >
+                    <option value="">Type</option>
+                    <option value="Lecture">Lecture</option>
+                    <option value="Lab">Lab</option>
+                    <option value="Tutorial">Tutorial</option>
+                    <option value="Study">Study</option>
+                    <option value="Break">Break</option>
+                    <option value="Assignment">Assignment</option>
+                    <option value="Project">Project</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: Grid layout */}
+          <div className="hidden sm:block space-y-3 max-h-96 overflow-y-auto">
             {timeSlots.map((slot) => (
               <div
                 key={slot.id}
@@ -328,8 +388,9 @@ export const StudentAssistant: React.FC<StudentAssistantProps> = ({ userId }) =>
           </div>
 
           <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <p className="text-sm text-blue-700 dark:text-blue-300">
-              💡 Tip: Click on any field to edit your schedule. Changes are saved automatically.
+            <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-300">
+              💡 Tip: <span className="hidden sm:inline">Click on any field to edit your schedule. Changes are saved automatically.</span>
+              <span className="sm:hidden">Tap fields to edit. Auto-saved.</span>
             </p>
           </div>
         </div>
