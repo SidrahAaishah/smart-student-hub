@@ -63,7 +63,7 @@ export const Navigation: React.FC<NavigationProps> = ({ userRole, currentView, o
   const navigationItems = getNavigationItems();
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-16 z-40">
+    <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 fixed top-16 sm:top-20 left-0 right-0 z-40">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Desktop Navigation */}
         <div className="hidden sm:flex space-x-6 lg:space-x-8">
