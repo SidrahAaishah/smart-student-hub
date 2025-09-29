@@ -22,10 +22,20 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
   const activities = storage.getActivities();
   const badges = storage.getBadges();
   
-  const student = students.find(s => s.id === user.id);
+  const student = students.find(s => s.id === user.id) || {
+    id: user.id,
+    name: user.name,
+    rollNumber: 'IIIT2021001',
+    department: 'Computer Science',
+    year: '3rd Year',
+    email: user.email,
+    cgpa: 8.7,
+    attendance: 92,
+    totalCredits: 17,
+    activities: [],
+    grades: []
+  };
   const studentActivities = activities.filter(a => a.studentId === user.id);
-  
-  if (!student) return null;
 
   const approvedActivities = studentActivities.filter(a => a.status === 'approved');
   const pendingActivities = studentActivities.filter(a => a.status === 'pending');
