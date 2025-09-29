@@ -22,6 +22,7 @@ import { Announcements } from './components/Admin/Announcements';
 import { User } from './types';
 import { storage } from './utils/storage';
 import { initializeMockData } from './utils/mockData';
+import { auth, canAccessRoute } from './utils/auth';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -31,11 +32,16 @@ function App() {
     // Initialize mock data on first load
     initializeMockData();
     
-    // Check for stored user
-    const storedUser = storage.getUser();
-    if (storedUser) {
-      setUser(storedUser);
-      setDefaultView(storedUser.role);
+    // Check for authenticated user
+    if (auth.isAuthenticated()) {
+      const currentUser = auth.getCurrentUser();
+      if (currentUser) {
+        setUser(currentUser);
+        setDefaultView(currentUser.role);
+      } else {
+        // Invalid session, logout
+        auth.logout();
+      }
     }
   }, []);
 
@@ -56,15 +62,26 @@ function App() {
   };
 
   const handleLogin = (userData: User) => {
+    // Validate user role
+    if (!['student', 'faculty', 'admin'].includes(userData.role)) {
+      console.error('Invalid user role');
+      return;
+    }
+    
     setUser(userData);
     storage.setUser(userData);
     setDefaultView(userData.role);
   };
 
   const handleLogout = () => {
+    auth.logout();
     setUser(null);
-    storage.removeUser();
     setCurrentView('');
+  };
+
+  // Route protection based on role
+  const isAuthorized = (route: string, userRole: string) => {
+    return canAccessRoute(userRole, route);
   };
 
   const renderCurrentView = () => {
@@ -72,6 +89,10 @@ function App() {
 
     switch (user.role) {
       case 'student':
+        // Check route authorization
+        if (!isAuthorized(currentView, user.role)) {
+          return <div className="text-center p-8"><p className="text-red-600">Access Denied: Insufficient permissions</p></div>;
+        }
         switch (currentView) {
           case 'dashboard':
             return <StudentDashboard user={user} />;
@@ -85,6 +106,10 @@ function App() {
             return <StudentDashboard user={user} />;
         }
       case 'faculty':
+        // Check route authorization
+        if (!isAuthorized(currentView, user.role)) {
+          return <div className="text-center p-8"><p className="text-red-600">Access Denied: Insufficient permissions</p></div>;
+        }
         switch (currentView) {
           case 'approvals':
             return <Approvals />;
@@ -94,6 +119,7 @@ function App() {
             return <Approvals />;
         }
       case 'admin':
+        // Admin can access all routes
         switch (currentView) {
           case 'dashboard':
             return <AdminDashboard />;
@@ -105,7 +131,7 @@ function App() {
             return <AdminDashboard />;
         }
       default:
-        return null;
+        return <div className="text-center p-8"><p className="text-red-600">Invalid Role</p></div>;
     }
   };
 
