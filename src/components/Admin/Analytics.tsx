@@ -65,10 +65,10 @@ export const Analytics: React.FC = () => {
 
   // Student engagement levels
   const engagementData = [
-    { level: 'High Achievers', count: Math.floor(totalStudents * 0.2), percentage: 20 },
-    { level: 'Active Students', count: Math.floor(totalStudents * 0.5), percentage: 50 },
-    { level: 'Moderate Participation', count: Math.floor(totalStudents * 0.2), percentage: 20 },
-    { level: 'Low Engagement', count: Math.floor(totalStudents * 0.1), percentage: 10 }
+    { level: 'High Achievers', count: 25, percentage: 35 },
+    { level: 'Active Students', count: 25, percentage: 20 },
+    { level: 'Moderate Participation', count: 25, percentage: 15 },
+    { level: 'Low Engagement', count: 25, percentage: 20 }
   ];
 
   const COLORS = ['#22C55E', '#3B82F6', '#F59E0B', '#EF4444'];
