@@ -70,6 +70,10 @@ function App() {
       return;
     }
     
+    // Ensure data is initialized before setting user
+    initializeMockData();
+    setIsDataInitialized(true);
+    
     setUser(userData);
     storage.setUser(userData);
     setDefaultView(userData.role);
