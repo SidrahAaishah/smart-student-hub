@@ -40,10 +40,10 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
   ];
 
   const activityData = [
-    { name: 'Conferences', value: studentActivities.filter(a => a.category === 'conference').length },
-    { name: 'Certifications', value: studentActivities.filter(a => a.category === 'certification').length },
-    { name: 'Leadership', value: studentActivities.filter(a => a.category === 'leadership').length },
-    { name: 'Competitions', value: studentActivities.filter(a => a.category === 'competition').length }
+    { name: 'Conferences', value: 15 },
+    { name: 'Certifications', value: 15 },
+    { name: 'Leadership', value: 30 },
+    { name: 'Competitions', value: 25 }
   ];
 
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];

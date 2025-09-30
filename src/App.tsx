@@ -27,10 +27,12 @@ import { auth, canAccessRoute } from './utils/auth';
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [currentView, setCurrentView] = useState('');
+  const [isDataInitialized, setIsDataInitialized] = useState(false);
 
   useEffect(() => {
     // Initialize mock data on first load
     initializeMockData();
+    setIsDataInitialized(true);
     
     // Check for authenticated user
     if (auth.isAuthenticated()) {
@@ -85,7 +87,7 @@ function App() {
   };
 
   const renderCurrentView = () => {
-    if (!user) return null;
+    if (!user || !isDataInitialized) return null;
 
     switch (user.role) {
       case 'student':
